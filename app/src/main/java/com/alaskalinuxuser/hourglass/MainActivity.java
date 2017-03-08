@@ -100,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (stoppedTimer) {
 
+            // First, let's stop the timebar from working until the timer is stopped
+            // or cancelled.
+            timeBar.setEnabled(false);
+
             /* Let's make a notification, so the user doesn't forget that they have a timer running.
              * I only want it to display if the timer is actually running.
              * I am giving them the option to clear the notification, it is not persistent.
@@ -137,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
                     // Cancel the notification.
                     mNotificationManager.cancel(0);
 
+                    // Set the time bar back to usable.
+                    timeBar.setEnabled(true);
+
                     // Spin the hourglass for a cool special affect.
                     myHourGlass.animate().rotation(0f).setDuration(1000).start();
 
@@ -170,6 +177,12 @@ public class MainActivity extends AppCompatActivity {
             // Stop the timer with cancel, and set the boolean for it being stopped.
             timeCount.cancel();
             stoppedTimer = true;
+
+            // Spin the hourglass for a cool special affect.
+            myHourGlass.animate().rotation(0f).setDuration(1000).start();
+
+            // Set the time bar back to usable.
+            timeBar.setEnabled(true);
 
             // Cancel the notification, based on it's number, in this case, 0.
             mNotificationManager.cancel(0);
