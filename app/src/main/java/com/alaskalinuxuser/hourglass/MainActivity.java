@@ -25,6 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Define the imageView.
     ImageView myHourGlass;
+    ImageView vibe;
+    // Define the sound choice button.
+    Button soundChoices;
     // Define the media player.
     MediaPlayer mp;
     // Define the text we wish to set.
@@ -46,11 +50,15 @@ public class MainActivity extends AppCompatActivity {
     // Define the integers.
     int maxTime;
     int curTime;
+    int soundNum;
     // Define the strings.
     String minutes;
     String seconds;
     String mi;
     String se;
+    String theButton;
+    // Declare our boolean.
+    boolean vibrateYes;
 
     // Get the application context for the notification.
     public Context context;
@@ -148,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                     myHourGlass.animate().rotation(0f).setDuration(1000).start();
 
                     //Play the sound file.
-                    mp.start();
+                    playThatSound();
 
                     // Set the time.
                     timeGoing.setText("00:00");
@@ -158,8 +166,12 @@ public class MainActivity extends AppCompatActivity {
                     timeUp.show();
 
                     // And vibrate, if the permission was granted, for 2 seconds.
-                    Vibrator vibRate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    vibRate.vibrate(2000);
+                    if (vibrateYes) {
+
+                        Vibrator vibRate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        vibRate.vibrate(2000);
+
+                    }
 
                 }
 
@@ -191,6 +203,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Our method that is called to play whichever sound was chosen....
+    public void playThatSound() {
+
+        // Fancy footwork to turn thebutton into the integer for the sound we want.
+        int mpSound = getResources().getIdentifier(theButton, "raw", "com.alaskalinuxuser.hourglass");
+
+        // Define the sound file.
+        mp = MediaPlayer.create(this, mpSound);
+
+        //Play the sound file.
+        mp.start();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,15 +225,27 @@ public class MainActivity extends AppCompatActivity {
         // Define our context for our notification.
         context = getApplicationContext();
 
+        // Yes, we set vibrate to on by default.
+        vibrateYes = true;
+        vibe = (ImageView) findViewById(R.id.vibView);
+        vibe.setImageResource(R.drawable.vibs);
+
+
+        // Define our button for sound choice.
+        soundChoices = (Button)findViewById(R.id.choiceButton);
+
+        // So we set the default sound.
+        theButton = "shipbell";
+        soundNum = 1;
+        // And the default sound button text.
+        soundChoices.setText("Bell");
+
         // Set the timer boolean to true for stopped, since we just opened the app.
         stoppedTimer = true;
 
         // Define the resources.
         timeGoing = (TextView)findViewById(R.id.timerView);
         myHourGlass = (ImageView)findViewById(R.id.imageGlass);
-
-        // Define the sound file.
-        mp = MediaPlayer.create(this, R.raw.shipbell);
 
         // Define the maximum time in milliseconds.
         maxTime = 3600000;
@@ -245,6 +283,57 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    // By request, a choice to change the sound used for the alarm.
+    public void choiceSound (View soundChoice) {
+
+        if (soundNum == 1) {
+
+            // So we set the new sound.
+            theButton = "horn";
+            soundNum = 2;
+            // And the default sound button text.
+            soundChoices.setText("Horn");
+
+        } else if (soundNum == 2){
+
+            // So we set the new sound.
+            theButton = "chirp";
+            soundNum = 3;
+            // And the default sound button text.
+            soundChoices.setText("chirp");
+
+        } else {
+
+            // So we set it back to the default sound.
+            theButton = "shipbell";
+            soundNum = 1;
+            // And the default sound button text.
+            soundChoices.setText("Bell");
+
+        }
+
+    }
+
+    public void vibChoice (View vibView) {
+
+        if (vibrateYes) {
+
+            // Set the boolean.
+            vibrateYes = false;
+            // Set the image.
+            vibe.setImageResource(R.drawable.novibs);
+
+        } else {
+
+            // Set the boolean.
+            vibrateYes = true;
+            // Set the image.
+            vibe.setImageResource(R.drawable.vibs);
+
+        }
 
     }
 

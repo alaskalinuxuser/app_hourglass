@@ -32,7 +32,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/hourglass"
+        android:src="@drawable/hourglass"
         android:id="@+id/imageGlass"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="100dp"
@@ -48,15 +48,6 @@
         android:id="@+id/timerView"
         android:textSize="45dp" />
 
-    <Button
-        android:text="About"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/aboutButton"
-        android:onClick="aboutClick"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:text="Click on the timer to start or stop."
         android:layout_width="wrap_content"
@@ -65,5 +56,34 @@
         android:textSize="20dp"
         android:layout_above="@+id/aboutButton"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="About"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/aboutButton"
+        android:onClick="aboutClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/choiceButton"
+        android:onClick="choiceSound" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/vibs"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/vibView"
+        android:onClick="vibChoice" />
 
 </RelativeLayout>
