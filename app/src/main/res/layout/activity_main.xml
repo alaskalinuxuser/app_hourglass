@@ -12,13 +12,15 @@
     tools:context="com.alaskalinuxuser.hourglass.MainActivity">
 
     <TextView
-        android:text="Set the time up to one hour."
+        android:text="Use the slider, or tap here for manual entry."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/timeScaleText"
-        android:textSize="20sp" />
+        android:textSize="18sp"
+        android:onClick="manualEntry"
+        android:gravity="center" />
 
     <SeekBar
         android:layout_width="match_parent"
@@ -85,5 +87,49 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/vibView"
         android:onClick="vibChoice" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/manEntryLayout"
+        android:background="?android:attr/colorBackground"
+        android:gravity="top|center">
+
+        <TextView
+            android:text="Please enter the desired time:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textSize="25sp"
+            android:gravity="center" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/manualTimeText"
+            android:layout_margin="25dp"
+            android:gravity="center_vertical|center"
+            android:background="@android:color/background_light"
+            android:textSize="25sp" />
+
+        <Button
+            android:text="OK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/okButton"
+            android:onClick="okGo" />
+
+        <TextView
+            android:text="@string/explain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:layout_margin="10dp" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -19,14 +19,19 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,16 +64,19 @@ public class MainActivity extends AppCompatActivity {
     String theButton;
     // Declare our boolean.
     boolean vibrateYes;
-
+    // Declare the manual time string and edittext box.
+    String manualTime;
+    EditText manualText;
+    // Declare the manual layout entry view.
+    LinearLayout manualEntryLayout;
     // Get the application context for the notification.
     public Context context;
-
     // Define the notificationmanager.
     NotificationManager mNotificationManager;
-
     // Define stopped boolean.
     boolean stoppedTimer;
 
+    // Call this method for the time.
     public void theTime (int timeStillLef) {
 
         // To get the rounded down number of "whole" minutes.
@@ -104,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // What to do when the hourglass is clicked.
     public void hourClick (View view) {
 
         if (stoppedTimer) {
@@ -222,6 +231,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Set the screen orientation to portrait to keep the screen rotation bug from stoping
+        // the timer on some phones.
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        // Define our manual text entry field.
+        manualText = (EditText)findViewById(R.id.manualTimeText);
+        // And give it a default number.
+        manualText.setText("5:00");
+
         // Define our context for our notification.
         context = getApplicationContext();
 
@@ -230,6 +248,9 @@ public class MainActivity extends AppCompatActivity {
         vibe = (ImageView) findViewById(R.id.vibView);
         vibe.setImageResource(R.drawable.vibs);
 
+        // Define the manual entry layout view.
+        manualEntryLayout = (LinearLayout) findViewById(R.id.manEntryLayout);
+        manualEntryLayout.setVisibility(View.INVISIBLE);
 
         // Define our button for sound choice.
         soundChoices = (Button)findViewById(R.id.choiceButton);
@@ -336,7 +357,101 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    // When we click on the text for manual entry.
+    public void manualEntry (View manView) {
 
+        // Make sure we stop the timer if they want to manually set it to something else.
+        if (stoppedTimer == false) {
+            // Stop the timer with cancel, and set the boolean for it being stopped.
+            timeCount.cancel();
+            stoppedTimer = true;
+
+            // Spin the hourglass for a cool special affect.
+            myHourGlass.animate().rotation(0f).setDuration(1000).start();
+
+            // Set the time bar back to usable.
+            timeBar.setEnabled(true);
+
+            // Cancel the notification, based on it's number, in this case, 0.
+            mNotificationManager.cancel(0);
+
+        }
+
+        // Show our manual entry view.
+        manualEntryLayout.setVisibility(View.VISIBLE);
+
+    }
+
+    // Ok, we chose a manual time entry, let's use it!
+    public void okGo (View okView) {
+
+        // First, let's hide the manual view screen.
+        manualEntryLayout.setVisibility(View.INVISIBLE);
+
+        // Now, let's set out text view and timer.
+        manualTime = manualText.getText().toString();
+
+        // A check to make sure the string is not nothing.
+        if (manualTime == "") {
+
+            // No time was entered, so nothing should be done.
+            Log.i("WJH", "Nothing");
+
+            // And if time was entered, then do this.
+        } else {
+
+            // A log entry for testing purposes.
+            // Log.i("WJH", manualTime);
+
+            // We wrap this in try, so the app can't crash if they put in some weird number....
+            try {
+
+                // Alright, let's split that time based on colon.
+                String[] foundSplit = manualTime.split(":");
+
+                // And let's get the seconds from the split.
+                String seconds = foundSplit[1];
+
+                // And the minutes from the split.
+                String minutes = foundSplit[0];
+
+                // Then we convert them to integers.
+                int sec = Integer.parseInt(seconds);
+                int min = Integer.parseInt(minutes);
+
+                // And do some basic math to turn them into milliseconds.
+                int math = (min * 60 * 1000) + (sec * 1000);
+
+                // A test point for me.
+                // Log.i("WJH", String.valueOf(math));
+
+                // Now we set the progress bar on the time bar to the new number, so they can use it.
+                timeBar.setProgress(math);
+
+                // We need an escape clause, of coarse.
+            } catch (Exception e) {
+
+                // To which we don't do anything, except a little log note.
+                Log.e("WJH", "exception");
+
+            }
+
+        }
+
+        // The problem was, after enting time and clicking okay. Now we have a huge keyboard in the
+        // way. So let's get rid of it. We do this with try/catch in the event that the keyboard
+        // never came up....
+        try {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(okView.getWindowToken(), 0);
+        } catch (Exception e) {
+            // Log it if we can't hide it.
+            Log.e("WJH", "We can't hide the keyboard.");
+        }
+
+    }
+
+    // And our aboutclick to tell us all about the app.
     public void aboutClick (View v)
     {
         // Call an intent to go to the second screen when you click the about button.
