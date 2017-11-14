@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Define the imageView.
     ImageView myHourGlass;
-    ImageView vibe;
+    ImageView vibe, recure;
     // Define the sound choice button.
     Button soundChoices;
     // Define the media player.
@@ -53,17 +53,11 @@ public class MainActivity extends AppCompatActivity {
     // Define the countdown timer.
     CountDownTimer timeCount;
     // Define the integers.
-    int maxTime;
-    int curTime;
-    int soundNum;
+    int maxTime, curTime, soundNum, recureTime;
     // Define the strings.
-    String minutes;
-    String seconds;
-    String mi;
-    String se;
-    String theButton;
+    String minutes, seconds, mi, se, theButton;
     // Declare our boolean.
-    boolean vibrateYes;
+    boolean vibrateYes, recureYes;
     // Declare the manual time string and edittext box.
     String manualTime;
     EditText manualText;
@@ -117,81 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (stoppedTimer) {
 
-            // First, let's stop the timebar from working until the timer is stopped
-            // or cancelled.
-            timeBar.setEnabled(false);
-
-            /* Let's make a notification, so the user doesn't forget that they have a timer running.
-             * I only want it to display if the timer is actually running.
-             * I am giving them the option to clear the notification, it is not persistent.
-             *
-             */
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.hourglass).setContentTitle("Hourglass").setContentText(
-                            "Your hourglass timer is running."
-                    );
-
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            PendingIntent pIntent = PendingIntent.getActivity(context, 0 , intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            builder.setContentIntent(pIntent);
-            mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-            Notification notif = builder.build();
-            mNotificationManager.notify(0, notif);
-
-            timeCount = new CountDownTimer(timeBar.getProgress(), 1000) {
-
-                @Override
-                public void onTick(long timeLeft) {
-
-                    // Update the time every tick with the method "theTime" based on the long "timeLeft".
-                    theTime((int) timeLeft);
-
-                }
-
-                // What to do when the timer is done.
-                @Override
-                public void onFinish() {
-
-                    // Cancel the notification.
-                    mNotificationManager.cancel(0);
-
-                    // Set the time bar back to usable.
-                    timeBar.setEnabled(true);
-
-                    // Spin the hourglass for a cool special affect.
-                    myHourGlass.animate().rotation(0f).setDuration(1000).start();
-
-                    //Play the sound file.
-                    playThatSound();
-
-                    // Set the time.
-                    timeGoing.setText("00:00");
-
-                    // And make a toast popup.
-                    Toast timeUp = Toast.makeText(getApplicationContext(), "Time is up!", Toast.LENGTH_LONG);
-                    timeUp.show();
-
-                    // And vibrate, if the permission was granted, for 2 seconds.
-                    if (vibrateYes) {
-
-                        Vibrator vibRate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                        vibRate.vibrate(2000);
-
-                    }
-
-                }
-
-            };
-
-            // Spin the hourglass for a cool special affect.
-            myHourGlass.animate().rotation(360f).setDuration(1000).start();
-
-            // Start the timer and set the boolean for running.
-            timeCount.start();
-            stoppedTimer = false;
+            recureTime = timeBar.getProgress();
+            startCount(recureTime, 1000);
 
         } else {
 
@@ -211,6 +132,103 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public void startCount (int allotedTime, final int countBy) {
+
+        // First, let's stop the time bar from working until the timer is stopped
+        // or cancelled.
+        timeBar.setEnabled(false);
+
+            /* Let's make a notification, so the user doesn't forget that they have a timer running.
+             * I only want it to display if the timer is actually running.
+             * I am giving them the option to clear the notification, it is not persistent.
+             *
+             */
+        String intentPhrase = "";
+
+        if (recureYes) {
+            intentPhrase = "Your recurring hourglass timer is running.";
+        } else {
+            intentPhrase = "Your hourglass timer is running.";
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.hourglass).setContentTitle("Hourglass").setContentText(
+                        intentPhrase);
+
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pIntent = PendingIntent.getActivity(context, 0 , intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        builder.setContentIntent(pIntent);
+        mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Notification notif = builder.build();
+        mNotificationManager.notify(0, notif);
+
+        timeCount = new CountDownTimer(allotedTime, countBy) {
+
+            @Override
+            public void onTick(long timeLeft) {
+
+                // Update the time every tick with the method "theTime" based on the long "timeLeft".
+                theTime((int) timeLeft);
+
+            }
+
+            // What to do when the timer is done.
+            @Override
+            public void onFinish() {
+
+                // Spin the hourglass for a cool special affect.
+                myHourGlass.animate().rotation(0f).setDuration(1000).start();
+
+                //Play the sound file.
+                playThatSound();
+
+                // And vibrate, if the permission was granted, for 2 seconds.
+                if (vibrateYes) {
+
+                    Vibrator vibRate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    vibRate.vibrate(2000);
+
+                }
+
+                if (recureYes) {
+                    //
+                    // And make a toast popup.
+                    Toast timeUp = Toast.makeText(getApplicationContext(),
+                            "Time is up! Restarting timer.", Toast.LENGTH_LONG);
+                    timeUp.show();
+
+                    startCount(recureTime, countBy);
+
+                } else {
+                    // Cancel the notification.
+                    mNotificationManager.cancel(0);
+
+                    // Set the time bar back to usable.
+                    timeBar.setEnabled(true);
+
+                    // Set the time.
+                    timeGoing.setText("00:00");
+
+                    // And make a toast popup.
+                    Toast timeUp = Toast.makeText(getApplicationContext(), "Time is up!",
+                            Toast.LENGTH_LONG);
+                    timeUp.show();
+                }
+            }
+        };
+
+        // Spin the hourglass for a cool special affect.
+        myHourGlass.animate().rotation(360f).setDuration(1000).start();
+
+        // Start the timer and set the boolean for running.
+        timeCount.start();
+        stoppedTimer = false;
+
+    }// end startCount
 
     // Our method that is called to play whichever sound was chosen....
     public void playThatSound() {
@@ -247,6 +265,9 @@ public class MainActivity extends AppCompatActivity {
         vibrateYes = true;
         vibe = (ImageView) findViewById(R.id.vibView);
         vibe.setImageResource(R.drawable.vibs);
+        recureYes = false;
+        recure = (ImageView) findViewById(R.id.recurView);
+        recure.setImageResource(R.drawable.notrecur);
 
         // Define the manual entry layout view.
         manualEntryLayout = (LinearLayout) findViewById(R.id.manEntryLayout);
@@ -357,6 +378,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public void recurChoice (View recurView) {
+
+        if (recureYes) {
+
+            // Set the boolean.
+            recureYes = false;
+            // Set the image.
+            recure.setImageResource(R.drawable.notrecur);
+
+        } else {
+
+            // Set the boolean.
+            recureYes = true;
+            // Set the image.
+            recure.setImageResource(R.drawable.recur);
+
+        }
+
+    }
+
     // When we click on the text for manual entry.
     public void manualEntry (View manView) {
 

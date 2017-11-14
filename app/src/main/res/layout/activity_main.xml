@@ -83,53 +83,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/vibs"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:id="@+id/vibView"
-        android:onClick="vibChoice" />
+        android:onClick="vibChoice"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/timerView"
+        android:layout_alignEnd="@+id/timerView" />
+
+    <ImageView
+        android:id="@+id/recurView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timerView"
+        android:onClick="recurChoice"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/timerView"
+        app:srcCompat="@drawable/notrecur" />
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/manEntryLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/manEntryLayout"
         android:background="?android:attr/colorBackground"
-        android:gravity="top|center">
+        android:gravity="top|center"
+        android:orientation="vertical">
 
         <TextView
-            android:text="Please enter the desired time:"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:textSize="25sp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="Please enter the desired time:"
+            android:textSize="25sp" />
 
         <EditText
+            android:id="@+id/manualTimeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="time"
-            android:ems="10"
-            android:id="@+id/manualTimeText"
             android:layout_margin="25dp"
-            android:gravity="center_vertical|center"
             android:background="@android:color/background_light"
+            android:ems="10"
+            android:gravity="center_vertical|center"
+            android:inputType="time"
             android:textSize="25sp" />
 
         <Button
-            android:text="OK"
+            android:id="@+id/okButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/okButton"
-            android:onClick="okGo" />
+            android:onClick="okGo"
+            android:text="OK" />
 
         <TextView
-            android:text="@string/explain"
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
+            android:layout_margin="10dp"
             android:gravity="center"
-            android:textSize="20sp"
-            android:layout_margin="10dp" />
+            android:text="@string/explain"
+            android:textSize="20sp" />
     </LinearLayout>
-
 </RelativeLayout>
