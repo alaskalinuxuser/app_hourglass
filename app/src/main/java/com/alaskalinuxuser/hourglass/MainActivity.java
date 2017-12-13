@@ -447,22 +447,30 @@ public class MainActivity extends AppCompatActivity {
 
             // We wrap this in try, so the app can't crash if they put in some weird number....
             try {
-
+                    int sec,min,math;
                 // Alright, let's split that time based on colon.
-                String[] foundSplit = manualTime.split(":");
+                if (manualTime.contains(":")) {
+                    String[] foundSplit = manualTime.split(":");
+                    // Testing only // Log.i("WJH", foundSplit[0]);
+                    // Testing only // Log.i("WJH", foundSplit[1]);
 
-                // And let's get the seconds from the split.
-                String seconds = foundSplit[1];
+                    // And let's get the seconds from the split.
+                    String seconds = foundSplit[1];
 
-                // And the minutes from the split.
-                String minutes = foundSplit[0];
+                    // And the minutes from the split.
+                    String minutes = foundSplit[0];
 
-                // Then we convert them to integers.
-                int sec = Integer.parseInt(seconds);
-                int min = Integer.parseInt(minutes);
+                    // Then we convert them to integers.
+                    sec = Integer.parseInt(seconds);
+                    min = Integer.parseInt(minutes);
+                } else {
+                    sec = 0;
+                    min = Integer.parseInt(manualTime);
+                    // Testing only // Log.i("WJH", String.valueOf(min));
+                }
 
                 // And do some basic math to turn them into milliseconds.
-                int math = (min * 60 * 1000) + (sec * 1000);
+                math = (min * 60 * 1000) + (sec * 1000);
 
                 // A test point for me.
                 // Log.i("WJH", String.valueOf(math));

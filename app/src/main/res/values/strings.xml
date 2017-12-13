@@ -18,6 +18,7 @@
     <string name="myWebsite">https://thealaskalinuxuser.wordpress.com</string>
 
     <string name="explain">Anything above 60 minutes will be counted as 60 minutes. Anything less than
-    one minute must have a leading zero and colon (0:00).</string>
+    one minute must have a leading zero and colon (0:00). Any value without a colon (e.g. 3 or 55) will
+        be counted as minutes.</string>
 
 </resources>

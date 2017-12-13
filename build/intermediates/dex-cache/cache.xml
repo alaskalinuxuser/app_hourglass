@@ -66,21 +66,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.3"
-        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
-        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.1_62e4c2dc50f2a367029983ee9d234446c9ce7288.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.3"
         sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
         <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_f47bb75570a059a2b03d788379183f304c72da5f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-24.2.1_62e4c2dc50f2a367029983ee9d234446c9ce7288.jar" />
     </item>
     <item
         is-multidex="false"
