@@ -153,8 +153,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.hourglass).setContentTitle("Hourglass").setContentText(
-                        intentPhrase);
+                .setSmallIcon(R.drawable.hourglass).setWhen(System.currentTimeMillis()+recureTime).setUsesChronometer(true)
+                .setContentTitle("Hourglass").setContentText(intentPhrase);
 
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
