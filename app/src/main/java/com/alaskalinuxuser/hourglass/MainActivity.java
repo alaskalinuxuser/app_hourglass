@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Define the imageView.
     ImageView myHourGlass;
-    ImageView vibe, recure;
+    ImageView vibe, recure, alre;
     // Define the sound choice button.
     Button soundChoices;
     // Define the media player.
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     // Define the strings.
     String minutes, seconds, mi, se, theButton;
     // Declare our boolean.
-    boolean vibrateYes, recureYes;
+    boolean vibrateYes, recureYes, alreYes;
     // Declare the manual time string and edittext box.
     String manualTime;
     EditText manualText;
@@ -204,11 +204,18 @@ public class MainActivity extends AppCompatActivity {
                     startCount(recureTime, countBy);
 
                 } else {
-                    // Cancel the notification.
-                    mNotificationManager.cancel(0);
 
-                    // Set the time bar back to usable.
-                    timeBar.setEnabled(true);
+                    if (alreYes) {
+
+                        startCount(2000,1000);
+
+                    } else {
+                        // Cancel the notification.
+                        mNotificationManager.cancel(0);
+
+                        // Set the time bar back to usable.
+                        timeBar.setEnabled(true);
+                    }
 
                     // Set the time.
                     timeGoing.setText("00:00");
@@ -217,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast timeUp = Toast.makeText(getApplicationContext(), "Time is up!",
                             Toast.LENGTH_LONG);
                     timeUp.show();
+
                 }
             }
         };
@@ -268,6 +276,9 @@ public class MainActivity extends AppCompatActivity {
         recureYes = false;
         recure = (ImageView) findViewById(R.id.recurView);
         recure.setImageResource(R.drawable.notrecur);
+        alreYes = false;
+        alre = (ImageView) findViewById(R.id.alreView);
+        alre.setImageResource(R.drawable.noalarmrecur);
 
         // Define the manual entry layout view.
         manualEntryLayout = (LinearLayout) findViewById(R.id.manEntryLayout);
@@ -394,6 +405,26 @@ public class MainActivity extends AppCompatActivity {
             recureYes = true;
             // Set the image.
             recure.setImageResource(R.drawable.recur);
+
+        }
+
+    }
+
+    public void alreChoice (View alreView) {
+
+        if (alreYes) {
+
+            // Set the boolean.
+            alreYes = false;
+            // Set the image.
+            alre.setImageResource(R.drawable.noalarmrecur);
+
+        } else {
+
+            // Set the boolean.
+            alreYes = true;
+            // Set the image.
+            alre.setImageResource(R.drawable.alarmrecur);
 
         }
 

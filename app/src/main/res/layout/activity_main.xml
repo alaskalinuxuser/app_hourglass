@@ -90,6 +90,15 @@
         android:layout_alignEnd="@+id/timerView" />
 
     <ImageView
+        android:id="@+id/alreView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/vibView"
+        android:onClick="alreChoice"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/noalarmrecur" />
+
+    <ImageView
         android:id="@+id/recurView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -105,7 +114,8 @@
         android:layout_height="match_parent"
         android:background="?android:attr/colorBackground"
         android:gravity="top|center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/textView"
@@ -142,4 +152,5 @@
             android:text="@string/explain"
             android:textSize="20sp" />
     </LinearLayout>
+
 </RelativeLayout>
