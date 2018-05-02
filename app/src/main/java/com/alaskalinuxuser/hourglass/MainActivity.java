@@ -14,6 +14,7 @@
 */
 package com.alaskalinuxuser.hourglass;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     // Define the strings.
     String minutes, seconds, mi, se, theButton;
     // Declare our boolean.
-    boolean vibrateYes, recureYes, alreYes;
+    static boolean vibrateYes, recureYes, alreYes, allCancel;
     // Declare the manual time string and edittext box.
     String manualTime;
     EditText manualText;
@@ -108,9 +109,14 @@ public class MainActivity extends AppCompatActivity {
 
     // What to do when the hourglass is clicked.
     public void hourClick (View view) {
+        wasClicked();
+    }
+
+    public void wasClicked() {
 
         if (stoppedTimer) {
 
+            allCancel = false;
             recureTime = timeBar.getProgress();
             startCount(recureTime, 1000);
 
@@ -152,9 +158,20 @@ public class MainActivity extends AppCompatActivity {
             intentPhrase = "Your hourglass timer is running.";
         }
 
+        // as a result of notification action
+        Intent detailsIntent = new Intent(MainActivity.this, CancelActivity.class);
+        detailsIntent.putExtra("EXTRA_DETAILS_ID", 42);
+        PendingIntent detailsPendingIntent = PendingIntent.getActivity(
+              MainActivity.this,
+              0,
+              detailsIntent,
+              PendingIntent.FLAG_UPDATE_CURRENT
+              );
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.hourglass).setWhen(System.currentTimeMillis()+recureTime).setUsesChronometer(true)
-                .setContentTitle("Hourglass").setContentText(intentPhrase);
+                .setContentTitle("Hourglass").setContentText(intentPhrase).addAction(
+                        android.R.drawable.ic_notification_clear_all, "Cancel", detailsPendingIntent);
 
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -171,8 +188,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long timeLeft) {
 
-                // Update the time every tick with the method "theTime" based on the long "timeLeft".
-                theTime((int) timeLeft);
+                if (allCancel) {
+
+                    wasClicked();
+
+                } else {
+
+                    // Update the time every tick with the method "theTime" based on the long "timeLeft".
+                    theTime((int) timeLeft);
+                }
 
             }
 
@@ -238,6 +262,10 @@ public class MainActivity extends AppCompatActivity {
 
     }// end startCount
 
+    public void cancellAll () {
+        // Do nothing.
+    }
+
     // Our method that is called to play whichever sound was chosen....
     public void playThatSound() {
 
@@ -269,6 +297,7 @@ public class MainActivity extends AppCompatActivity {
         // Define our context for our notification.
         context = getApplicationContext();
 
+        allCancel = false;
         // Yes, we set vibrate to on by default.
         vibrateYes = true;
         vibe = (ImageView) findViewById(R.id.vibView);

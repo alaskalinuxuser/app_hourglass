@@ -30,12 +30,48 @@
     </item>
     <item
         is-multidex="false"
+        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/design/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-design-24.2.1_d644fb4defda738e45c45fec15affb1499b5d4ad.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-24.2.1_de696f2211c854c575cea7977a6a80a3a8f6ace1.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.3"
         sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
         <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-24.2.1_9d5c779e2c133ddf7e7e63510a08cc880d5481a5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.1_93c8be4f68b349f3bbcde9f7b147e759811ba0dd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.1_eaac762755fca55afe276d7e9449bcee31331d12.jar" />
     </item>
     <item
         is-multidex="false"
@@ -54,6 +90,15 @@
         revision="24.0.3"
         sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
         <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/support-annotations-24.2.1_c50a48bdb76b448a5729153ed1299580a8585777.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_d08b730e380be956584ab6a963acfc69be942452.jar" />
     </item>
     <item
         is-multidex="false"
@@ -93,30 +138,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.2/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.3"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.2.1_93c8be4f68b349f3bbcde9f7b147e759811ba0dd.jar" />
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support.constraint-constraint-layout-1.0.2_f0ad6b73809a6c00601e5accfa6cb8eec89e2266.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jar="/home/alaskalinuxuser/Android/Sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.3"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-24.2.1_eaac762755fca55afe276d7e9449bcee31331d12.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="24.0.3"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/internal_impl-24.2.1_d08b730e380be956584ab6a963acfc69be942452.jar" />
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/home/alaskalinuxuser/AndroidStudioProjects/released/Hourglass/app/build/intermediates/pre-dexed/debug/constraint-layout-solver-1.0.2_f0ca4585c7e182f726a66cf4e8f333c4b8622af2.jar" />
     </item>
     <item
         is-multidex="false"
